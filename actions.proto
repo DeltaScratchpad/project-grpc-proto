@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package event_processing;
+
+import "pipeline_data.proto";
+
+service EventProcessor {
+  rpc ProcessBatch(pipeline_data.BatchProcessingEvent) 
+    returns (EventProcessingResult);
+}
+
+message EventProcessingResult {
+  bool success = 1;
+}

@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package pipeline_errors;
+
+import "pipeline_data.proto";
+
+// Error messages are used to report issues during the processing of a pipeline.
+// Errors are reported to the error_url provided in the CommandList.
+// Errors should contain information relevent to resolving the issue, 
+// and the event which caused the error when applicable.
+message Error {
+  // The unique identifier for the query
+  string query_id = 1;
+  // The step in the query which is reporting the error.
+  uint32 step = 2;
+  // Whether the error is recoverable.
+  // Non-recoverable errors terminate the pipeline.
+  // Recoverable errors should still forward events to the next stage.
+  bool recoverable = 3;
+  // Error message to be reported to the user.
+  // Should include actionable information to resolve the issue.
+  string message = 4;
+  // Optional: The event which caused the error to occur.
+  optional pipeline_data.Event event = 5;
+}
+
+
+service ErrorReporter {
+  rpc ReportError(Error) returns (ErrorReportResponse);
+}
+
+message ErrorReportResponse {
+  bool success = 1;
+  string err = 2;
+}
