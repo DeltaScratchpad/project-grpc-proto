@@ -2,13 +2,15 @@ syntax = "proto3";
 
 package pipeline_data;
 
+option go_package = "project/grpc-proto/pipeline_data";
+
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
 // A single instruction to be executed by a pipeline stage
 message CommandStep {
   // The name provided by the user (typically the first argument)
-  string nameame = 1;
+  string name = 1;
   // All other values provided to the function by the user
   string args = 2;
   // Location at which the function will be contacted

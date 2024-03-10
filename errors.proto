@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package pipeline_errors;
 
+option go_package = "project/grpc-proto/pipeline_errors";
+
 import "pipeline_data.proto";
 
 // Error messages are used to report issues during the processing of a pipeline.

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package event_processing;
 
+option go_package = "project/grpc-proto/event_processing";
+
 import "pipeline_data.proto";
 
 service EventProcessor {
